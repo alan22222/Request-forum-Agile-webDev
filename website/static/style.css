@@ -1,0 +1,259 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-family: calibri;
+}
+nav {
+  padding:5px  12px;
+  border-radius: 34px;
+
+}
+.nav-bar{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  padding: 12px 20px;
+  background-color:#8cc099;
+}
+.logo a{
+  color: white;
+  font-size: 35px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.menu{
+  display: flex;
+}
+.menu li{
+  padding-left: 24px;
+  padding-top: 9px;
+}
+.menu li a{
+display: inline-block;
+text-decoration: none;
+color: white;
+text-align: center;
+transition: 0.15s ease-in-out;
+position: relative;
+}
+.menu li a::after{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: crimson;
+  transition: 0.15s ease-in-out;
+}
+.menu li a:hover:after{
+  width: 100%;
+}
+.login{
+  background-color: black;
+  margin-left: 10px;
+  border-radius: 10px;
+  padding: 10px;
+  width: 90px;
+  
+}
+
+.signup{
+  background-color: black;
+  border-radius: 10px;
+  margin-left: 10px;
+  padding: 12px 19px;
+}
+.signup,.login {
+  font-weight: bold;
+  font-size: 15px;
+  border: 2px solid slategray;
+}
+.open-menu,.close-menu{
+  position: absolute;
+  color:black;
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: none;
+}
+.open-menu{
+  top: 6%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+.close-menu{
+  top: 20px;
+  right: 20px;
+}
+#check{
+  display:none;
+}
+.gate{
+  margin-top: 12%;
+}
+@media(max-width:678px){
+  .menu{
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 50%;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      right:-100%;
+      z-index: 100;
+      background-color: #8cc099;
+      transition: all 0.2s ease-in-out ;
+  }
+  .login,.signup{
+      background-color: #8cc099;
+      border-radius: 0;
+      border: 0;
+      font-weight:510;
+      
+  } 
+  .menu li{ margin: 10px;}
+  .menu li a{
+      padding: 6px;
+  }
+  .open-menu,.close-menu{
+      display: block;
+  }
+  #check:checked~.menu{
+      right: 0;
+  }
+
+  .line{
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      
+  } 
+  .line .side1{
+      margin-left: 15%;
+  } 
+  .side2 img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      margin-top: 12%;
+  }
+  
+}
+
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 9% 5%;
+}
+
+.line .side1 {
+  padding-right: 50px;
+}
+
+.side1 h1 {
+  font-size: 60px;
+  margin-bottom: 10px;
+  color: green;
+}
+
+.side1 button {
+  width: 200px;
+  padding: 12px 40px;
+  border-radius: 20px;
+  border-style: none;
+  font-size: 17px;
+  font-weight: 600;
+  background-color: black;
+
+}
+.side1 button a{
+  text-decoration: none;
+  color:white;
+  
+}
+button{
+  margin: 14px 0;
+}
+.side2 img{
+  border-radius: 20px 0px 20px 0px;
+} 
+
+.row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1 5%;
+}
+.row i{
+  font-size: 90px;
+  align-items: center;
+  justify-content: center;
+  padding:50px;
+  color:green;
+}
+.row h3{
+  font-size: 35px;
+}
+
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+  margin: 8%;
+}
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+.row p{
+      display:inline-block block;
+      margin-top: 3px;
+      margin-right: 1%;
+      justify-content: center;
+      align-items: center;
+}
+.col-lg-4{
+  
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.sidebyside{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin:11% 5%;
+  padding-left: 45px;
+}
+
+.sidebyside .sidebyside1 {
+  margin: 0 53px;
+  padding: 12px 0px;
+}
+
+.sidebyside2 img{
+  border-radius: 20px 20px 20px 2ch;
+}
+.authors{
+  text-align: center;
+  margin-top: 12%;
+}
+.authorpreview{
+  margin: 3%;
+  font-size: 30px;
+}
+.imagesauthor img{
+  border-radius: 50%;
+  padding:9px 15px;
+}
+.bgg-body-tertiary{
+  padding-top: 50px;
+  background-color: gray;
+  margin: 100px 0 0 0;
+}

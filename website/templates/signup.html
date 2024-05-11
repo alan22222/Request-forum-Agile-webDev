@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='loginsignupstyle.css') }}">
+    
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous"
+  />
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    crossorigin="anonymous"
+  />
+    <script src="https://kit.fontawesome.com/0e7cae0c06.js" crossorigin="anonymous"></script> 
+    <title>signup</title>  
+</head>
+<body>
+   
+    <div class="container1">
+<!-- jinja code for the comment  -->
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+            messages %} {% for category, message in messages %} {% if category ==
+            'error' %}
+            <div class="alert alert-danger alter-dismissable fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% else %}
+            <div class="alert alert-success alter-dismissable fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+        <div class="form-box1">
+
+           
+
+            <h1 id="title">Signup</h1>
+            <form action="" method="post">
+                <div class="input-group1">
+
+                    <div class="input-field1" id="usernamefield">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" placeholder="Username" name="username" id="username">
+                    </div>
+
+                    <div class="input-field1">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" placeholder="Email" name="email" id="email">
+                    </div>
+
+                    <div class="input-field1">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" placeholder="Password" name="password" id="password">
+                    </div>
+                    <!-- <p>Forgot password <a href="#">Click me!</a></p> -->
+                </div>
+                <div class="btn-field1">
+                    <button type="submit" id="signupbtn"> Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"
+  ></script>
+    <!-- <script>
+        let signupbtn=document.getElementById("signupbtn");
+        let loginbtn=document.getElementById("loginbtn");
+        let title=document.getElementById("title");
+        let usernamefield=document.getElementById("usernamefield");
+
+        loginbtn.onclick=function(){
+            usernamefield.style.maxHeight="0";
+            title.innerHTML="Login";
+            signupbtn.classList.add("disable");
+            loginbtn.classList.remove("disable");
+        }
+
+        signupbtn.onclick=function(){
+            usernamefield.style.maxHeight="60px";
+            title.innerHTML="Sign Up";
+            signupbtn.classList.remove("disable");
+            loginbtn.classList.add("disable");
+        }
+
+    </script> -->
+</body>
+</html>

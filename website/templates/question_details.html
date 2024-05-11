@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container { margin-top: 20px; }
+        .answer { margin-bottom: 20px; }
+        textarea { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ question.title }}</h5>
+                <p class="card-text">{{ question.body }}</p>
+                <p>Asked by {{ question.author.username }} on {{ question.date.strftime('%Y-%m-%d') }}</p>
+                {% for category in question.categories %}
+                <span class="badge badge-info">{{ category.title }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h3 class="mt-4">Answers</h3>
+        {% for answer in answers %}
+        <div class="card answer">
+            <div class="card-body">
+                <p>{{ answer.body }}</p>
+                <footer class="blockquote-footer">Answered by {{ answer.author.username }} on {{ answer.date.strftime('%Y-%m-%d') }}</footer>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if current_user.is_authenticated %}
+        <form action="{{ url_for('question_details', question_id=question.id) }}" method="POST">
+            <textarea name="answer" class="form-control" rows="3" placeholder="Type your answer here..."></textarea>
+            <button type="submit" class="btn btn-primary mt-2">Post Answer</button>
+        </form>
+        {% else %}
+        <p>Please <a href="{{ url_for('login') }}">log in</a> to post answers.</p>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
