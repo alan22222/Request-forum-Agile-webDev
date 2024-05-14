@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Question Details</title>
+
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .container { margin-top: 20px; }
@@ -12,6 +15,33 @@
     </style>
 </head>
 <body>
+    <header>
+        <nav>
+            <ul class="nav-bar">
+                <div class="logo"><a href="">Request Forum</a></div>
+            <input type="checkbox" id="check">
+            <span class="menu">
+                {%if user.is_authenticated%}
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('question') }}">Post</a></li>
+                <li><a href="{{ url_for('feed') }}">Feed</a></li>
+                <li><a href="{{ url_for('category') }}">Category</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+  
+                {% else %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('signup') }}">Signup</a></li>
+                <li><a href="{{ url_for('category') }}">Category</a></li>
+  
+                {% endif %}
+                <label for="check" class="close-menu"><i class="fas fa-times"></i></label>
+            </span>
+            <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>
+  
+            </ul>
+        </nav>
+    </header>
+
     <div class="container">
         <div class="card">
             <div class="card-body">

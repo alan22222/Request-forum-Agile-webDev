@@ -7,14 +7,13 @@ from flask_login import (LoginManager, UserMixin, current_user, login_manager,
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 from werkzeug.security import check_password_hash, generate_password_hash
+from flask_migrate import Migrate
 
-db = SQLAlchemy()
-DB_NAME='database.db'
 app = Flask(__name__)
 app.secret_key = 'agile web dev'
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
-db.init_app(app)
-
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 
 class User(db.Model, UserMixin):
@@ -106,10 +105,9 @@ def signup():
         email = request.form.get('email')
         password = request.form.get('password')
 
-        user=User.query.filter_by(email=email).first()
+        user = User.query.filter_by(email=email).first()
         if user:
-            flash('Email alreay exist',category='error')
-
+            flash('Email already exists', category='error')
         elif len(username) < 4:
             flash("Username must be greater than 4 characters.", category='error')
         elif len(email) < 4:
@@ -117,21 +115,21 @@ def signup():
         elif len(password) < 7:
             flash("Password is short, must be greater than 7 characters", category='error')
         else:
-
-            new_user=User(username=username,email=email, password= generate_password_hash(password))#sqlmodel=form name
+            new_user = User(username=username, email=email, password=generate_password_hash(password))
             db.session.add(new_user)
             db.session.commit()
-            login_user(user,remember=True)
+            login_user(new_user, remember=True)
             flash('Account created!', category='success')
             return redirect(url_for('home'))
 
     return render_template('signup.html')
 
+
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('home'))
 
 
 @app.route('/category', methods=['GET','POST'])
@@ -147,7 +145,7 @@ def category():
         else:
             flash('The title  is required.','error')
 
-    return render_template('category.html')
+    return render_template('category.html',user=current_user)
 
 
 
@@ -177,13 +175,13 @@ def question():
         return redirect(url_for('home'))
 
     categories = Category.query.all()
-    return render_template('questiontemplate.html', categories=categories)
+    return render_template('questiontemplate.html', categories=categories,user=current_user)
 
 
 @app.route('/feed', methods=['GET', 'POST'])
 def feed():
     questions = Question.query.all() 
-    return render_template('feed.html', questions=questions)
+    return render_template('feed.html', questions=questions,user=current_user)
 
 # @app.route('/question/<int:question_id>', methods=['GET', 'POST'])
 # def question_details(question_id):
@@ -206,10 +204,10 @@ def question_details(question_id):
         db.session.add(new_answer)
         db.session.commit()
         flash('Answer submitted successfully!', 'success')
-        return redirect(url_for('question_details', question_id=question_id))
+        return redirect(url_for('question_details', question_id=question_id, user=current_user))
 
     answers = Answer.query.filter_by(question_id=question_id).all()
-    return render_template('question_details.html', question=question, answers=answers)
+    return render_template('question_details.html', question=question, answers=answers, user=current_user)
 
 # chtgpt code
 # @app.route('/question/<int:question_id>', methods=['GET', 'POST'])

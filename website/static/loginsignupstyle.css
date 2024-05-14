@@ -90,4 +90,7 @@ form p a{
     height: 250px;
 }
 
-
+a:hover {
+    color: #007bff;
+    text-decoration: underline;
+}

@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='loginsignupstyle.css') }}">
     
     <link
@@ -20,6 +22,33 @@
     <title>signup</title>  
 </head>
 <body>
+  <header>
+      <nav>
+          <ul class="nav-bar">
+              <div class="logo"><a href="">Request Forum</a></div>
+          <input type="checkbox" id="check">
+          <span class="menu">
+              {%if user.is_authenticated%}
+              <li><a href="{{ url_for('home') }}">Home</a></li>
+              <li><a href="{{ url_for('question') }}">Post</a></li>
+              <li><a href="{{ url_for('feed') }}">Feed</a></li>
+              <li><a href="{{ url_for('category') }}">Category</a></li>
+              <li><a href="{{ url_for('logout') }}">Logout</a></li>
+
+              {% else %}
+              <li><a href="{{ url_for('login') }}">Login</a></li>
+              <li><a href="{{ url_for('signup') }}">Signup</a></li>
+              <li><a href="{{ url_for('category') }}">Category</a></li>
+
+              {% endif %}
+              <label for="check" class="close-menu"><i class="fas fa-times"></i></label>
+          </span>
+          <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>
+
+          </ul>
+      </nav>
+  </header>
+
    
     <div class="container1">
 <!-- jinja code for the comment  -->
@@ -68,11 +97,11 @@
                 <div class="btn-field1">
                     <button type="submit" id="signupbtn"> Sign Up</button>
                 </div>
+                <div><p><a href="/login">Already have an account?</a></p></div>
             </form>
         </div>
     </div>
-
-
+    
     <script
     src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
