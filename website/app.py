@@ -18,6 +18,12 @@ login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
 
+# Create database before the Flask app starts
+@app.before_request
+def before_request_func():
+    with app.app_context():
+        create_database(app)
+
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
