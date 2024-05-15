@@ -45,7 +45,7 @@ def signup():
         email = request.form.get('email')
         password = request.form.get('password')
         return auth_signup(username, email, password)
-    return render_template('login.html', user=current_user)
+    return render_template('signup.html', user=current_user)
 
 @app.route('/logout')
 @login_required
