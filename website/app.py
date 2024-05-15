@@ -33,7 +33,9 @@ def home():
     return render_template("home.html", user=current_user)
 
 # Other routes
+# Authorisation Routes
 
+# Login Page
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     # Login route implementation
@@ -43,6 +45,7 @@ def login():
         return auth_login(email, password)
     return render_template('login.html', user=current_user)
 
+# Signup Page
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     # Signup route implementation
@@ -53,12 +56,16 @@ def signup():
         return auth_signup(username, email, password)
     return render_template('signup.html', user=current_user)
 
+# Logout Redirect
 @app.route('/logout')
 @login_required
 def logout():
     # Logout route implementation
     return auth_logout()
 
+# Content Routes
+
+# Category Creation Page
 @app.route('/category', methods=['GET', 'POST'])
 def category():
     # Category route implementation
@@ -75,6 +82,7 @@ def category():
 
     return render_template('category.html',user=current_user)
 
+# Post Submission Page
 @app.route('/question', methods=['GET', 'POST'])
 def question():
     # Question route implementation
@@ -101,16 +109,36 @@ def question():
         return redirect(url_for('home'))
 
     categories = Category.query.all()
-    return render_template('questiontemplate.html', categories=categories,user=current_user)
+    return render_template('questiontemplate.html', categories=categories, user=current_user)
 
-
+# Feed View Page
 @app.route('/feed', methods=['GET', 'POST'])
 def feed():
     # Feed route implementation
-    questions = Question.query.all() 
-    return render_template('feed.html', questions=questions,user=current_user)
+    categories = Category.query.all() # Fetch all categories from the database
 
+    category_filter = request.args.get('category') # Get category filter from query parameters
+    sort = request.args.get('sort') # Get sort parameter from query parameters
 
+    questions = Question.query
+
+    if category_filter: # Filter questions based on the specified category
+        questions = Question.query.join(Question.categories).filter(Category.title == category_filter)
+    else:
+        category_filter = ""
+
+    if sort == 'newest':
+        questions = questions.order_by(Question.id.desc())  # Sort by newest
+    elif sort == 'oldest':
+        questions = questions.order_by(Question.id)  # Sort by oldest
+    else:
+        questions = questions.order_by(Question.id.desc())  # Sort by newest DEFAULT
+
+    questions = questions.all()
+
+    return render_template('feed.html', categories=categories, questions=questions, user=current_user, category_set=category_filter)
+
+# Post Detail Page
 @app.route('/question/<int:question_id>', methods=['GET', 'POST'])
 def question_details(question_id):
     # Question details route implementation
@@ -130,6 +158,14 @@ def question_details(question_id):
     answers = Answer.query.filter_by(question_id=question_id).all()
     return render_template('question_details.html', question=question, answers=answers, user=current_user)
 
+# Profile User Page
+""" 
+@app.route('/profile', methods=['GET','POST'])
+def profile():
+    # Profile route implementation
+
+
+"""
 
 if __name__ == '__main__':
     create_database(app)
