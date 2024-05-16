@@ -21,20 +21,28 @@ def login(email, password):
             return redirect(url_for('home'))
         else:
             flash('Incorrect password, try again', category='error')
+            # Redirect to the same page to clear form data and refresh
+            return redirect(url_for('login'))
     else:
         flash('Email does not exist', category='error')
+        # Redirect to the same page to clear form data and refresh
+        return redirect(url_for('login'))
     return render_template('login.html', user=current_user)
 
 def signup(username, email, password):
     user = User.query.filter_by(email=email).first()
     if user:
         flash('Email already exists', category='error')
+        return redirect(url_for('signup'))
     elif len(username) < 4:
         flash('Username must be greater than 4 characters.', category='error')
+        return redirect(url_for('signup'))
     elif len(email) < 4:
         flash('Email must be greater than 4 characters.', category='error')
+        return redirect(url_for('signup'))
     elif len(password) < 7:
         flash('Password is short, must be greater than 7 characters', category='error')
+        return redirect(url_for('signup'))
     else:
         new_user = User(username=username, email=email, password=generate_password_hash(password))
         db.session.add(new_user)

@@ -73,15 +73,24 @@ def create():
         if 'new_category' in request.form:
             title = request.form.get('title')
             if title:
-                new_category = Category(title=title)
-                db.session.add(new_category)
-                db.session.commit()
-                flash('Category added successfully!', 'success')
+                # Filter Duplicate Fields
+                category_exists = Category.query.filter_by(title = title).first()
+                if category_exists:
+                    flash('Category already exists', 'error')
+                    # Redirect to the same page to clear form data and refresh
+                    return redirect(url_for('create'))
+                else:
+                    new_category = Category(title=title)
+                    db.session.add(new_category)
+                    db.session.commit()
+                    flash('Category added successfully!', 'success')
 
-                # Redirect to the same page to clear form data and refresh
-                return redirect(url_for('create'))
+                    # Redirect to the same page to clear form data and refresh
+                    return redirect(url_for('create'))
             else:
                 flash('The title is required.', 'error')
+                # Redirect to the same page to clear form data and refresh
+                return redirect(url_for('create'))
         
         # If the form is submitted for posting a new question
         elif 'new_question' in request.form:
@@ -91,6 +100,8 @@ def create():
 
             if not title or not body:
                 flash('Both title and body are required.', 'error')
+                # Redirect to the same page to clear form data and refresh
+                return redirect(url_for('create'))
             else:
                 new_question = Question(title=title, body=body, user_id=current_user.id)
                 db.session.add(new_question)
