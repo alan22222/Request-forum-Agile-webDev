@@ -65,51 +65,49 @@ def logout():
 
 # Content Routes
 
-# Category Creation Page
-@app.route('/category', methods=['GET', 'POST'])
-def category():
-    # Category route implementation
+# Combined Category Creation and Post Submission Page
+@app.route('/create', methods=['GET', 'POST'])
+def create():
     if request.method == 'POST':
-        title = request.form.get('title')
-        if title:  
-            new_category = Category(title=title)
-            db.session.add(new_category)
-            db.session.commit()
-            flash('Category added successfully!','success')
-            return redirect(url_for('home'))  
-        else:
-            flash('The title  is required.','error')
+        # If the form is submitted for creating a new category
+        if 'new_category' in request.form:
+            title = request.form.get('title')
+            if title:
+                new_category = Category(title=title)
+                db.session.add(new_category)
+                db.session.commit()
+                flash('Category added successfully!', 'success')
 
-    return render_template('category.html',user=current_user)
-
-# Post Submission Page
-@app.route('/question', methods=['GET', 'POST'])
-def question():
-    # Question route implementation
-    if request.method == 'POST':
-        title = request.form.get('title')
-        body = request.form.get('body')
-        category_ids = request.form.getlist('category')  # This should be the name of the input field for categories in your form.
-
-        if not title or not body:
-            flash('both title and body are required.', 'error')
-            return redirect(url_for('question'))
-
-        new_question = Question(title=title, body=body, user_id=current_user.id)
-        db.session.add(new_question)
-        db.session.flush()  # Ensure 'id' is available if needed before commit for newly created question.
-
-        # Handle categories
-        if category_ids:
-            categories = Category.query.filter(Category.id.in_(category_ids)).all()
-            new_question.categories.extend(categories)
+                # Redirect to the same page to clear form data and refresh
+                return redirect(url_for('create'))
+            else:
+                flash('The title is required.', 'error')
         
-        db.session.commit()
-        flash('Question submitted successfully!', 'success')
-        return redirect(url_for('home'))
+        # If the form is submitted for posting a new question
+        elif 'new_question' in request.form:
+            title = request.form.get('title')
+            body = request.form.get('body')
+            category_ids = request.form.getlist('category')
 
+            if not title or not body:
+                flash('Both title and body are required.', 'error')
+            else:
+                new_question = Question(title=title, body=body, user_id=current_user.id)
+                db.session.add(new_question)
+                db.session.flush()
+
+                if category_ids:
+                    categories = Category.query.filter(Category.id.in_(category_ids)).all()
+                    new_question.categories.extend(categories)
+
+                db.session.commit()
+                flash('Question submitted successfully!', 'success')
+
+                # Redirect to the same page to clear form data and refresh
+                return redirect(url_for('create'))
+            
     categories = Category.query.all()
-    return render_template('questiontemplate.html', categories=categories, user=current_user)
+    return render_template('create.html', categories=categories, user=current_user)
 
 # Feed View Page
 @app.route('/feed', methods=['GET', 'POST'])

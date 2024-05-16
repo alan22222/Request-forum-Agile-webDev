@@ -29,16 +29,15 @@
             <span class="menu">
                 {%if user.is_authenticated%}
                 <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('question') }}">Post</a></li>
                 <li><a href="{{ url_for('feed') }}">Feed</a></li>
-                <li><a href="{{ url_for('category') }}">Category</a></li>
+                <li><a href="{{ url_for('create') }}">Create</a></li>
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
 
                 {% else %}
+                <li><a href="{{ url_for('home') }}">Home</a></li>
                 <li><a href="{{ url_for('login') }}">Login</a></li>
                 <li><a href="{{ url_for('signup') }}">Signup</a></li>
-                <li><a href="{{ url_for('category') }}">Category</a></li>
-
+                
                 {% endif %}
                 <label for="check" class="close-menu"><i class="fas fa-times"></i></label>
             </span>
