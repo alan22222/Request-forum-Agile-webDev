@@ -276,11 +276,12 @@ button{
   margin: 1 5%;
 }
 .row i{
-  font-size: 90px;
+  font-size: 40px;
   align-items: center;
   justify-content: center;
   padding:50px;
   color:green;
+
 }
 .row h3{
   font-size: 35px;
@@ -294,6 +295,7 @@ button{
 .mb-0 {
   margin-bottom: 0 !important;
 }
+
 .row p{
       display:inline-block block;
       margin-top: 3px;
@@ -411,4 +413,29 @@ button[type="submit"]:hover {
 
 #scrollToTopBtn:hover {
   background-color: #555;
+}
+
+.onside{
+  display: flex;
+  display: inline-block;  
+}
+.gapbtw td{
+  padding-right: 10px;
+  text-align: center;
+}
+.gapbtw {
+  text-align: center;
+}
+.onside tr{
+  padding-bottom:34px;
+}
+
+.top-commenter {
+  color: green; 
+}
+.second-commenter{
+  color: red;
+}
+.third-commenter{
+  color: purple;
 }

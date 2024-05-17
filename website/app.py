@@ -1,12 +1,14 @@
 # app.py
-from flask import Flask, flash, redirect, render_template, request, url_for
-from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-
-from models import db, User, Question, Category, Answer, question_categories
+from auth import login as auth_login
+from auth import logout as auth_logout
+from auth import signup as auth_signup
 from database import create_database
-from auth import login as auth_login, signup as auth_signup, logout as auth_logout
+from flask import Flask, flash, redirect, render_template, request, url_for
+from flask_login import (LoginManager, current_user, login_required,
+                         login_user, logout_user)
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
+from models import Answer, Category, Question, User, db, question_categories
 
 app = Flask(__name__)
 app.secret_key = 'agile web dev'
@@ -145,7 +147,15 @@ def feed():
 
     questions = questions.all()
 
-    return render_template('feed.html', categories=categories, questions=questions, user=current_user, category_set=category_filter)
+    #top commented users profile and their commnted count
+    # top_comments=db.session.query(User.username,db.func.count(Answer.user_id)).join(Answer).group_by(User.id).order_by(Answer.user_id.desc()).limit(5).all()
+
+    top_comments = db.session.query(User.username, db.func.count(Answer.user_id).label('comments_count')).join(Answer).group_by(User.id).order_by(db.func.count(Answer.user_id).desc()).limit(5).all()
+
+
+
+
+    return render_template('feed.html', categories=categories, questions=questions, user=current_user, category_set=category_filter, top_comments=top_comments)
 
 # Post Detail Page
 @app.route('/question/<int:question_id>', methods=['GET', 'POST'])
@@ -168,14 +178,18 @@ def question_details(question_id):
     return render_template('question_details.html', question=question, answers=answers, user=current_user)
 
 # Profile User Page
-""" 
-@app.route('/profile', methods=['GET','POST'])
+
+@app.route('/userprofile', methods=['GET','POST'])
 def profile():
-    # Profile route implementation
+    if not current_user:
+        flash('You must be logged in to see this page.', 'warning')
+        return redirect(url_for('login'))  # Redirect to login if not logged in
+    
+    return render_template('userprofile.html', user=current_user)
 
 
-"""
+
 
 if __name__ == '__main__':
-    create_database(app)
+    before_request_func()
     app.run(debug=True)
