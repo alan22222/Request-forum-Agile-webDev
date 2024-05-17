@@ -15,18 +15,22 @@ The Request Forum Website is a community board designed for the easy exchange of
 | 23985897   | Yehao Chen    | [@Yehaochen2024](https://github.com/Yehaochen2024)      |
 
 ## How to Run
+1. **Navigate to Website Directory:**
+   ```bash
+   cd ./website
+   ```
 
-1. **Activate Flask Environment:**
+2. **Activate Flask Environment:**
    ```bash
    source assig_env/bin/activate
    ```
    
-2. **Run Flask:**
+3. **Run Flask:**
     ```bash
     flask run
     ```
 
-3. **Open Local Host URL**
+4. **Open Local Host URL**
 
 
 ## How to Test:
