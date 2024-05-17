@@ -148,12 +148,7 @@ def feed():
 
     questions = questions.all()
 
-    #top commented users profile and their commnted count
-    # top_comments=db.session.query(User.username,db.func.count(Answer.user_id)).join(Answer).group_by(User.id).order_by(Answer.user_id.desc()).limit(5).all()
-
-    top_comments = db.session.query(User.username, db.func.count(Answer.user_id).label('comments_count')).join(Answer).group_by(User.id).order_by(db.func.count(Answer.user_id).desc()).limit(5).all()
-
-    return render_template('feed.html', categories=categories, questions=questions, user=current_user, category_set=category_filter, top_comments=top_comments)
+    return render_template('feed.html', categories=categories, questions=questions, user=current_user, category_set=category_filter)
 
 # Post Detail Page
 @app.route('/question/<int:question_id>', methods=['GET', 'POST'])

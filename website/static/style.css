@@ -410,13 +410,3 @@ button{
 .onside tr{
   padding-bottom:34px;
 }
-
-.top-commenter {
-  color: green; 
-}
-.second-commenter{
-  color: red;
-}
-.third-commenter{
-  color: purple;
-}
