@@ -44,18 +44,19 @@
           <input type="checkbox" id="check">
           <span class="menu">
             {%if user.is_authenticated%}
-            <li><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('feed') }}">Feed</a></li>
-            <li><a href="{{ url_for('create') }}">Create</a></li>
-            <li><a href="{{url_for('profile')}}">Profile</a></li>
-            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('feed') }}">Feed</a></li>
+                <li><a href="{{ url_for('create') }}">Create</a></li>
+                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
 
-            {% else %}
-            <li><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('login') }}">Login</a></li>
-            <li><a href="{{ url_for('signup') }}">Signup</a></li>
-            
-            {% endif %}
+                {% else %}
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('feed') }}">Feed</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('signup') }}">Signup</a></li>
+                
+                {% endif %}
             <label for="check" class="close-menu"><i class="fas fa-times"></i></label>
           </span>
           <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>

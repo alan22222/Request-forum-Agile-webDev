@@ -44,10 +44,12 @@
                 <li><a href="{{ url_for('home') }}">Home</a></li>
                 <li><a href="{{ url_for('feed') }}">Feed</a></li>
                 <li><a href="{{ url_for('create') }}">Create</a></li>
+                <li><a href="{{ url_for('profile') }}">Profile</a></li>
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
 
                 {% else %}
                 <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('feed') }}">Feed</a></li>
                 <li><a href="{{ url_for('login') }}">Login</a></li>
                 <li><a href="{{ url_for('signup') }}">Signup</a></li>
                 
@@ -111,7 +113,7 @@
             <button type="submit" class="btn btn-primary mt-2">Post Answer</button>
         </form>
         {% else %}
-        <p>Please <a href="{{ url_for('login') }}">log in</a> to post answers.</p>
+        <p>Please <a href="{{ url_for('login') }}">log in</a> to submit response.</p>
         {% endif %}
     </div>
 

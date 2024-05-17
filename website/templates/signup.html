@@ -36,18 +36,20 @@
   <header>
       <nav>
           <ul class="nav-bar">
-              <div class="logo"><a>Request Forum</a></div>
+              <div class="logo"><a href="">Request Forum</a></div>
           <input type="checkbox" id="check">
           <span class="menu">
               {%if user.is_authenticated%}
               <li><a href="{{ url_for('home') }}">Home</a></li>
               <li><a href="{{ url_for('feed') }}">Feed</a></li>
               <li><a href="{{ url_for('create') }}">Create</a></li>
+              <li><a href="{{ url_for('profile') }}">Profile</a></li>
               <li><a href="{{ url_for('logout') }}">Logout</a></li>
 
               {% else %}
               <li><a href="{{ url_for('home') }}">Home</a></li>
-              <li><a href="{{ url_for('login') }}">Login</a></li>
+              <li><a href="{{ url_for('feed') }}">Feed</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
               <li><a href="{{ url_for('signup') }}">Signup</a></li>
               
               {% endif %}

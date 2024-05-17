@@ -69,9 +69,10 @@ def logout():
 
 # Combined Category Creation and Post Submission Page
 @app.route('/create', methods=['GET', 'POST'])
+@login_required
 def create():
     if request.method == 'POST':
-        # If the form is submitted for creating a new category
+         # If the form is submitted for creating a new category
         if 'new_category' in request.form:
             title = request.form.get('title')
             if title:
@@ -93,7 +94,7 @@ def create():
                 flash('The title is required.', 'error')
                 # Redirect to the same page to clear form data and refresh
                 return redirect(url_for('create'))
-        
+            
         # If the form is submitted for posting a new question
         elif 'new_question' in request.form:
             title = request.form.get('title')
@@ -175,8 +176,8 @@ def question_details(question_id):
     return render_template('question_details.html', question=question, answers=answers, user=current_user)
 
 # Profile User Page
-
 @app.route('/userprofile', methods=['GET','POST'])
+@login_required
 def profile():
     if not current_user:
         flash('You must be logged in to see this page.', 'warning')
