@@ -114,8 +114,8 @@ def create():
                 db.session.commit()
                 flash('Question submitted successfully!', 'success')
 
-                # Redirect to the same page to clear form data and refresh
-                return redirect(url_for('create'))
+                # Redirect to the feed page
+                return redirect(url_for('feed'))
             
     categories = Category.query.all()
     return render_template('create.html', categories=categories, user=current_user)

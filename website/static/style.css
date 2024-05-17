@@ -84,15 +84,14 @@ form p a{
   height: 250px;
 }
 
-
 body{
   font-family: calibri;
 }
 
+/* Navigation Bar */
 nav {
   padding:5px  12px;
   border-radius: 34px;
-
 }
 .nav-bar{
   width: 100%;
@@ -109,6 +108,12 @@ nav {
   font-weight: 600;
   text-decoration: none;
 }
+.logo a:hover{ /* Prevent Aesthetic change on hover */
+  color: white;
+  font-size: 35px;
+  font-weight: 600;
+  text-decoration: none;
+}
 .menu{
   display: flex;
 }
@@ -120,6 +125,7 @@ nav {
 display: inline-block;
 text-decoration: none;
 color: white;
+font-size: 20px;
 text-align: center;
 transition: 0.15s ease-in-out;
 position: relative;
@@ -136,26 +142,6 @@ position: relative;
 }
 .menu li a:hover:after{
   width: 100%;
-}
-.login{
-  background-color: black;
-  margin-left: 10px;
-  border-radius: 10px;
-  padding: 10px;
-  width: 90px;
-  
-}
-
-.signup{
-  background-color: black;
-  border-radius: 10px;
-  margin-left: 10px;
-  padding: 12px 19px;
-}
-.signup,.login {
-  font-weight: bold;
-  font-size: 15px;
-  border: 2px solid slategray;
 }
 .open-menu,.close-menu{
   position: absolute;
@@ -176,6 +162,7 @@ position: relative;
 #check{
   display:none;
 }
+/* Navigation Bar End */
 .gate{
   margin-top: 12%;
 }
@@ -193,13 +180,6 @@ position: relative;
       background-color: #8cc099;
       transition: all 0.2s ease-in-out ;
   }
-  .login,.signup{
-      background-color: #8cc099;
-      border-radius: 0;
-      border: 0;
-      font-weight:510;
-      
-  } 
   .menu li{ margin: 10px;}
   .menu li a{
       padding: 6px;
@@ -323,6 +303,7 @@ button{
 .sidebyside2 img{
   border-radius: 20px 20px 20px 2ch;
 }
+
 .authors{
   text-align: center;
   margin-top: 12%;
@@ -370,7 +351,7 @@ button{
   border-radius: 4px;
 }
 
-button[type="submit"]:hover {
+#filter-apply button:hover {
   background-color: #0056b3;
 }
 
@@ -383,7 +364,7 @@ button[type="submit"]:hover {
   background-color: green; 
   color: white; 
   border: none;
-  padding: 8px 10px;
+  padding: 5px 10px;
   cursor: pointer; 
   border-radius: 4px;
 }
