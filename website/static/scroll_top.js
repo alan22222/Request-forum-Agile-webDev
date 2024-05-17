@@ -1,4 +1,4 @@
-// custom_feed.js
+// scroll_top.js
 // javascript functions for feed interactivity
 
 // JavaScript to show/hide the button based on scroll position

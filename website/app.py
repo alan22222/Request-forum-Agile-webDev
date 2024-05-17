@@ -152,9 +152,6 @@ def feed():
 
     top_comments = db.session.query(User.username, db.func.count(Answer.user_id).label('comments_count')).join(Answer).group_by(User.id).order_by(db.func.count(Answer.user_id).desc()).limit(5).all()
 
-
-
-
     return render_template('feed.html', categories=categories, questions=questions, user=current_user, category_set=category_filter, top_comments=top_comments)
 
 # Post Detail Page
@@ -184,10 +181,11 @@ def profile():
     if not current_user:
         flash('You must be logged in to see this page.', 'warning')
         return redirect(url_for('login'))  # Redirect to login if not logged in
+    else:
+        posts = Question.query.filter_by(user_id=current_user.id).all()
+        comments = Answer.query.filter_by(user_id=current_user.id).all()
     
-    return render_template('userprofile.html', user=current_user)
-
-
+    return render_template('userprofile.html', user=current_user, posts=posts, comments=comments)
 
 
 if __name__ == '__main__':
