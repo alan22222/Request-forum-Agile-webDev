@@ -20,12 +20,14 @@ The Request Forum Website is a community board designed for the easy exchange of
 ## How to Run
 1. **Navigate to Website Directory:**
    ```bash
-   cd ./website
+   cd Request-forum-Agile-webDev/website
    ```
 
-2. **Activate Flask Environment:**
+2. **Generate and Activate Flask Environment:**
    ```bash
-   source assig_env/bin/activate
+   python -m venv forest_env
+   
+   source forest_env/bin/activate
    ```
 
 3. **Install Requirements:**
