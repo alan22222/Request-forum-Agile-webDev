@@ -171,17 +171,18 @@ def question_details(question_id):
     return render_template('question_details.html', question=question, answers=answers, user=current_user)
 
 # Profile User Page
-@app.route('/userprofile', methods=['GET','POST'])
+@app.route('/userprofile/<int:profile_id>', methods=['GET','POST'])
 @login_required
-def profile():
-    if not current_user:
-        flash('You must be logged in to see this page.', 'warning')
-        return redirect(url_for('login'))  # Redirect to login if not logged in
-    else:
-        posts = Question.query.filter_by(user_id=current_user.id).all()
-        comments = Answer.query.filter_by(user_id=current_user.id).all()
+def profile(profile_id):
+    profile_user = User.query.get(profile_id)
+    if not profile_user:
+        flash('User not found.', 'error')
+        return redirect(url_for('home'))
     
-    return render_template('userprofile.html', user=current_user, posts=posts, comments=comments)
+    posts = Question.query.filter_by(user_id=profile_user.id).all()
+    comments = Answer.query.filter_by(user_id=profile_user.id).all()
+    
+    return render_template('userprofile.html', user=current_user, profile_user=profile_user, posts=posts, comments=comments)
 
 
 if __name__ == '__main__':

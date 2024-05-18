@@ -36,14 +36,14 @@
   <header>
       <nav>
           <ul class="nav-bar">
-              <div class="logo"><a href="">Request Forum</a></div>
+              <div class="logo"><a href="">Forest Forum</a></div>
           <input type="checkbox" id="check">
           <span class="menu">
               {%if user.is_authenticated%}
               <li><a href="{{ url_for('home') }}">Home</a></li>
               <li><a href="{{ url_for('feed') }}">Feed</a></li>
               <li><a href="{{ url_for('create') }}">Create</a></li>
-              <li><a href="{{ url_for('profile') }}">Profile</a></li>
+              <li><a href="{{ url_for('profile', profile_id=user.id) }}">Profile</a></li>
               <li><a href="{{ url_for('logout') }}">Logout</a></li>
 
               {% else %}
@@ -112,6 +112,14 @@
               </div>
           </form>
     </div>
-    
+      
+  <footer class="gate">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color:#8cc099">
+        © 2024 Copyright:
+    </div>
+    <!-- Copyright -->
+</footer>
+
 </body>
 </html>

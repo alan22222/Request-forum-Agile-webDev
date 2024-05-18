@@ -42,14 +42,14 @@
   <header>
       <nav>
           <ul class="nav-bar">
-              <div class="logo"><a href="">Request Forum</a></div>
+              <div class="logo"><a href="">Forest Forum</a></div>
           <input type="checkbox" id="check">
           <span class="menu">
             {%if user.is_authenticated%}
                 <li><a href="{{ url_for('home') }}">Home</a></li>
                 <li><a href="{{ url_for('feed') }}">Feed</a></li>
                 <li><a href="{{ url_for('create') }}">Create</a></li>
-                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('profile', profile_id=user.id) }}">Profile</a></li>
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
 
                 {% else %}
@@ -142,7 +142,9 @@
                 src="{{ url_for('static', filename='user.png') }}" alt="avatar" width="60" height="60" />
               <div>
                 <h6 class="fw-bold text-primary mb-1">
-                  {{ question.author.username }}
+                  <a href="{{ url_for('profile', profile_id=question.author.id) }}" class="text-decoration-none">
+                    {{ question.author.username }}
+                  </a>
                 </h6>
                 <p class="text-muted small mb-0">
                   Shared publicly - {{ question.date.strftime('%d-%m-%Y') }}
@@ -162,7 +164,7 @@
             </p>
 
             <div class="d-flex justify-content-center"> 
-              <a href="{{ url_for('question_details', question_id=question.id) }}"class="btn btn-sm"> 
+              <a href="{{ url_for('question_details', question_id=question.id) }}" class="btn btn-sm"> 
                 <i class="far fa-comment-dots me-1"></i>
               </a>
             </div>
@@ -174,7 +176,13 @@
   </div>
 </section>
 
-
+<footer class="gate">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color:#8cc099">
+    © 2024 Copyright:
+  </div>
+  <!-- Copyright -->
+</footer>
 
 </body>
 </html>
