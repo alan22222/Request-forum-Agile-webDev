@@ -27,7 +27,13 @@
       src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"></script>
-
+    <style>
+      .footer { 
+          position: absolute; 
+          bottom: 0; 
+          /*z-index: 10; */
+      }
+    </style>
     <title>Login</title>
 </head>
 <body>
@@ -35,7 +41,7 @@
       <nav>
           <ul class="nav-bar">
               <div class="logo"><a href="">Forest Forum</a></div>
-            input type="checkbox" id="check">
+            <input type="checkbox" id="check">
           <span class="menu">
               {%if user.is_authenticated%}
               <li><a href="{{ url_for('home') }}">Home</a></li>
@@ -105,8 +111,7 @@
               </div>
           </form>
   </div>
-    
-  <footer class="gate">
+  <footer class="gate fixed-bottom">
       <!-- Copyright -->
       <div class="text-center p-3" style="background-color:#8cc099">
           © 2024 Copyright:
