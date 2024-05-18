@@ -3,8 +3,10 @@
 ### CITS5505 Agile Web Development
 ## Group Assignment
 
+
 ## Description
 The Request Forum Website is a community board designed for the easy exchange of information and requests for sale or purchase. The platform allows users to post requests, respond to requests, and engage in discussions through comments. Each user is uniquely identified, and requests can be categorized for better organization.
+
 
 ## Group Members
 
@@ -13,6 +15,7 @@ The Request Forum Website is a community board designed for the easy exchange of
 | 24085576   | Alan Chacko   | [@alan22222](https://github.com/alan22222)          |
 | 22229135   | Daniel Crole  | [@MeAndMySkyHooks](https://github.com/MeAndMySkyHooks)    |
 | 23985897   | Yehao Chen    | [@Yehaochen2024](https://github.com/Yehaochen2024)      |
+
 
 ## How to Run
 1. **Navigate to Website Directory:**
@@ -24,13 +27,19 @@ The Request Forum Website is a community board designed for the easy exchange of
    ```bash
    source assig_env/bin/activate
    ```
+
+3. **Install Requirements:**
+   ```bash
+   pip install -r ./requirements.txt
+   ```
    
-3. **Run Flask:**
+4. **Run Flask:**
     ```bash
     flask run
     ```
 
-4. **Open Local Host URL**
+5. **Open Local Host URL**
+   [local host](http://127.0.0.1:5000)
 
 
 ## How to Test:
@@ -39,5 +48,6 @@ The Request Forum Website is a community board designed for the easy exchange of
 3. Create Post
 4. View and interact with Feed Page
 5. Create Comment
-6. Logout
-7. Login again or Create new user
+6. View Profile
+7. Logout
+8. Login again or Create new user
