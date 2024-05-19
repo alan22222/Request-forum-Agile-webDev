@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css">
+    <link rel='stylesheet' id='roboto-subset.css-css'  href='https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/mdb5/fonts/roboto-subset.css?ver=3.9.0-update.5' type='text/css' media='all' />
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    
+    <!-- Flash Alert asthetic  -->
+    <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous"/>
+    <!-- Flash Alert function  -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+
+    <title>Home</title>
+
+    <!-- <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}"> -->
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-bar">
+                <div class="logo"><a href="">Forest Forum</a></div>
+            <input type="checkbox" id="check">
+            <span class="menu">
+                {%if user.is_authenticated%}
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('feed') }}">Feed</a></li>
+                <li><a href="{{ url_for('create') }}">Create</a></li>
+                <li><a href="{{ url_for('profile', profile_id=user.id) }}">Profile</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+
+                {% else %}
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('feed') }}">Feed</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('signup') }}">Signup</a></li>
+                
+                {% endif %}
+                <label for="check" class="close-menu"><i class="fas fa-times"></i></label>
+            </span>
+            <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>
+
+            </ul>
+        </nav>
+    </header>
+
+        <!-- Alert Messages  -->
+        {% with messages = get_flashed_messages(with_categories=true) %} 
+            {% if messages %} 
+              {% for category, message in messages %} 
+                {% if category =='error' %}
+                    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                      {{ message }}
+                      <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-success alter-dismissable fade show" role="alert">
+                      {{ message }}
+                      <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                {% endif %} 
+              {% endfor %} 
+            {% endif %} 
+        {% endwith %}
+    
+        <div class="line" id="Home">
+            <div class="side1">
+                <h1>Welcome to the Forest Community Forum!</h1>
+                <p>The Forest Community Forum is your ultimate destination for everything related to forests, hiking, trail walking, and staying informed about the natural world around us. This platform is designed for nature enthusiasts, hikers, and anyone who appreciates the serenity and adventure that forests offer. Whether you're an experienced hiker looking to share your latest trail story, a beginner seeking advice on the best gear, or someone interested in the latest conservation efforts, you'll find a vibrant and supportive community here.</p>
+            </div>
+            <div class="side2">
+                <img src="{{ url_for('static', filename='top_photo_title.jpeg') }}" alt="Cloudy Forest Hills"width="500">
+            </div>
+        </div>
+
+        <section class="features-icons bg-light text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
+                            <h3>Latest News</h3>
+                            <p class="lead mb-0">Jump into the most recent discussions and stay on top of all things forest related. Newsletter to be released very soon.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
+                            <h3>Warnings & Events</h3>
+                            <p class="lead mb-0">Learn about Weather alerts, Trail closures, and Wildlife warnings to make sure you have a safe and fun time out in the forest.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <div class="container gate" id="Home">
+            <div class="row">
+                <!-- Image Section -->
+                <div class="col-md-6">
+                    <img src="{{ url_for('static', filename='home1_photo.jpg') }}" alt="Forest Hikers" class="img-fluid" alt="Colleagues in Office">
+
+                </div>
+                <!-- Text Section -->
+                <div class="col-md-6">
+                    <p>Our forum is organized into several categories to help you navigate and find the discussions that interest you most. In the General Discussion section, new members can introduce themselves and participate in casual chats with fellow nature lovers. The Forests and Hiking category is perfect for sharing your favorite trails, discussing hiking tips, and recounting memorable experiences.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" id="Home2">
+            <div class="row">
+                <!-- Text Section -->
+                <div class="col-md-6 order-md-1 order-2">
+                    <p>Safety is a top priority in our community, which is why we have a dedicated Trail Warnings and Safety section. Here, you'll find updates on trail closures, wildlife warnings, and weather alerts to ensure you stay safe during your outdoor adventures. Stay informed with the latest developments in our Forest News section, where you can read about recent news, conservation efforts, and upcoming community events.</p>
+                </div>
+                <!-- Image Section -->
+                <div class="col-md-6 order-md-2 order-1">
+                    <img src="{{ url_for('static', filename='home2_photo.jpg') }}" alt="Forest Trail" class="img-fluid" alt="Colleagues in Office">
+                </div>
+            </div>
+        </div>
+
+        <div class="container" id="Home">
+            <div class="row">
+                <!-- Image Section -->
+                <div class="col-md-6">
+                    <img src="{{ url_for('static', filename='home3_photo.jpg') }}" alt="Local Hiker" class="img-fluid" alt="Colleagues in Office">
+
+                </div>
+                <!-- Text Section -->
+                <div class="col-md-6">
+                    <p>Capture the beauty of nature in our Photo Gallery, where members share stunning photos from their hikes, trail moments, and wildlife encounters. If you’ve lost or found something during your outdoor activities, our Lost and Found section is the place to reconnect with your belongings. For those seeking practical information, our Resources and Guides section provides hiking guides, trail maps, and useful links to enhance your outdoor experiences. Our forum is a space for collaboration, learning, and sharing. By joining, you’ll be part of a community that values the preservation of our natural environment and the joy that comes from exploring it.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container d-flex justify-content-center align-items-center gate">
+            <div class="community-section text-center">
+                <h1>Join the Community!</h1>
+                <p>Register today to create an account and dive into the discussions. If you're already a member, log in to catch up on the latest posts and connect with fellow nature enthusiasts. For any questions or support, don’t hesitate to contact us.</p>
+                <p>Stay connected with us through social media and subscribe to our newsletter to receive the latest updates directly in your inbox. We look forward to sharing this journey with you. Happy hiking, stay safe, and enjoy the trails!</p>
+                <a href="{{ url_for('signup') }}" class="btn btn-primary btn-lg m-2">Register</a>
+                <a href="{{ url_for('login') }}" class="btn btn-secondary btn-lg m-2">Login</a>
+            </div>
+        </div>
+
+
+<footer class="gate">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color:#8cc099">
+      © 2024 Copyright
+    </div>
+    <!-- Copyright -->
+</footer>
+
+</body>
+</html>

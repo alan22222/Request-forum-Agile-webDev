@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container { margin-top: 20px; }
+        .answer { margin-bottom: 20px; }
+        textarea { margin-top: 10px; }
+    </style>
+
+    <!-- Flash Alert asthetic  -->
+    <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous"/>
+    <!-- Flash Alert function  -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+
+    <title>Question Details</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-bar">
+                <div class="logo"><a href="">Forest Forum</a></div>
+            <input type="checkbox" id="check">
+            <span class="menu">
+                {%if user.is_authenticated%}
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('feed') }}">Feed</a></li>
+                <li><a href="{{ url_for('create') }}">Create</a></li>
+                <li><a href="{{ url_for('profile', profile_id=user.id) }}">Profile</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+
+                {% else %}
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('feed') }}">Feed</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('signup') }}">Signup</a></li>
+                
+                {% endif %}
+                <label for="check" class="close-menu"><i class="fas fa-times"></i></label>
+            </span>
+            <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>
+  
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Alert Messages  -->
+    {% with messages = get_flashed_messages(with_categories=true) %} 
+        {% if messages %} 
+            {% for category, message in messages %} 
+                {% if category =='error' %}
+                    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                      {{ message }}
+                      <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-success alter-dismissable fade show" role="alert">
+                      {{ message }}
+                      <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                {% endif %} 
+            {% endfor %} 
+        {% endif %} 
+    {% endwith %}
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ question.title }}</h5>
+                <p class="card-text">{{ question.body }}</p>
+                <p>Asked by 
+                    <a href="{{ url_for('profile', profile_id=question.author.id) }}" class="text-decoration-none">
+                        {{ question.author.username }}
+                    </a>
+                    on {{ question.date.strftime('%Y-%m-%d') }}
+                </p>
+                {% for category in question.categories %}
+                <span class="badge badge-info">{{ category.title }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h3 class="mt-4">Answers</h3>
+        {% for answer in answers %}
+        <div class="card answer">
+            <div class="card-body">
+                <p>{{ answer.body }}</p>
+                <footer class="blockquote-footer">
+                    Answered by 
+                    <a href="{{ url_for('profile', profile_id=answer.author.id) }}" class="text-decoration-none">
+                        {{ answer.author.username }}
+                    </a>
+                    on {{ answer.date.strftime('%Y-%m-%d') }}
+                </footer>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if current_user.is_authenticated %}
+        <form action="{{ url_for('question_details', question_id=question.id) }}" method="POST">
+            <textarea name="answer" class="form-control" rows="3" placeholder="Type your answer here..."></textarea>
+            <button type="submit" class="btn btn-primary mt-2">Post Answer</button>
+        </form>
+        {% else %}
+        <p>Please <a href="{{ url_for('login') }}">log in</a> to submit response.</p>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    
+    <footer class="gate fixed-bottom">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color:#8cc099">
+            © 2024 Copyright:
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+</body>
+</html>
+

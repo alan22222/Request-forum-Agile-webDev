@@ -1,0 +1,412 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: calibri;
+}
+
+.form-box1{
+  width: 90%;
+  max-width: 450px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: white;
+  padding: 50px 60px 70px;
+  text-align: center;
+}
+
+.form-box1 h1{
+  font-size: 30px;
+  margin-bottom: 60px;
+  color: #8cc099;
+  position: relative;
+}
+
+.form-box1 h1::after{
+  content: '';
+  width: 30px;
+  height: 4px;
+  border-radius:3px;
+  background-color: #8cc099;
+  position: absolute;
+  bottom: -12px;
+  left: 50%;    
+  transform: translateX(-50%);
+}
+.input-field1 {
+  background: #eaeaea;
+  margin: 15px 0;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  max-height: 65px;
+  transition: max-height 0.5s;
+  overflow: hidden;
+}
+input{
+  width: 100%;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 18px 15px;
+}
+.input-field1 i{
+  margin-left: 15px;
+  color: #999;
+}
+form p{
+  text-align: left;
+  font-size: 13px;
+}
+form p a{
+  text-decoration:  none;
+  color: #8cc099;
+}
+.btn-field1{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.btn-field1 button{
+  flex-basis: 48%;
+  background-color:#8cc099;
+  color: white;
+  height: 40px;
+  border-radius: 20px;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  transition: background 1s;
+}
+.input-group1{
+  height: 250px;
+}
+
+body{
+  font-family: calibri;
+}
+
+/* Navigation Bar */
+nav {
+  padding:5px  12px;
+  border-radius: 34px;
+}
+.nav-bar{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  padding: 12px 20px;
+  background-color:#8cc099;
+}
+.logo a{
+  color: white;
+  font-size: 35px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.logo a:hover{ /* Prevent Aesthetic change on hover */
+  color: white;
+  font-size: 35px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.menu{
+  display: flex;
+}
+.menu li{
+  padding-left: 24px;
+  padding-top: 9px;
+}
+.menu li a{
+display: inline-block;
+text-decoration: none;
+color: white;
+font-size: 20px;
+text-align: center;
+transition: 0.15s ease-in-out;
+position: relative;
+}
+.menu li a::after{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: crimson;
+  transition: 0.15s ease-in-out;
+}
+.menu li a:hover:after{
+  width: 100%;
+}
+.open-menu,.close-menu{
+  position: absolute;
+  color:black;
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: none;
+}
+.open-menu{
+  top: 6%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+.close-menu{
+  top: 20px;
+  right: 20px;
+}
+#check{
+  display:none;
+}
+/* Navigation Bar End */
+.gate{
+  margin-top: 12%;
+}
+@media(max-width:678px){
+  .menu{
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 50%;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      right:-100%;
+      z-index: 100;
+      background-color: #8cc099;
+      transition: all 0.2s ease-in-out ;
+  }
+  .menu li{ margin: 10px;}
+  .menu li a{
+      padding: 6px;
+  }
+  .open-menu,.close-menu{
+      display: block;
+  }
+  #check:checked~.menu{
+      right: 0;
+  }
+
+  .line{
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      
+  } 
+  .line .side1{
+      margin-left: 15%;
+  } 
+  .side2 img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      margin-top: 12%;
+  }
+  
+}
+
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 9% 5%;
+}
+
+.line .side1 {
+  padding-right: 50px;
+}
+
+.side1 h1 {
+  font-size: 60px;
+  margin-bottom: 10px;
+  color: green;
+}
+
+.side1 button {
+  width: 200px;
+  padding: 12px 40px;
+  border-radius: 20px;
+  border-style: none;
+  font-size: 17px;
+  font-weight: 600;
+  background-color: black;
+
+}
+.side1 button a{
+  text-decoration: none;
+  color:white;
+  
+}
+button{
+  margin: 14px 0;
+}
+.side2 img{
+  border-radius: 20px 0px 20px 0px;
+} 
+
+.row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1 5%;
+}
+.row i{
+  font-size: 40px;
+  align-items: center;
+  justify-content: center;
+  padding:50px;
+  color:green;
+
+}
+.row h3{
+  font-size: 35px;
+}
+
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+  margin: 8%;
+}
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.row p{
+      display:inline-block block;
+      margin-top: 3px;
+      margin-right: 1%;
+      justify-content: center;
+      align-items: center;
+}
+.col-lg-4{
+  
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.sidebyside{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin:11% 5%;
+  padding-left: 45px;
+}
+
+.sidebyside .sidebyside1 {
+  margin: 0 53px;
+  padding: 12px 0px;
+}
+
+.sidebyside2 img{
+  border-radius: 20px 20px 20px 2ch;
+}
+
+.authors{
+  text-align: center;
+  margin-top: 12%;
+}
+.authorpreview{
+  margin: 3%;
+  font-size: 30px;
+}
+.imagesauthor img{
+  border-radius: 50%;
+  padding:9px 15px;
+}
+.bgg-body-tertiary{
+  padding-top: 50px;
+  background-color: gray;
+  margin: 100px 0 0 0;
+}
+
+/* Style for Category Filter button */
+.filter-section {
+  display: flex;
+  align-items: center; /* Vertically center items */
+  justify-content: center; /* Horizontally center items */
+}
+
+.filter-form {
+  margin-right: 10%; /* Add margin between form and sorting buttons */
+}
+
+.sorting-buttons button {
+  margin-left: 10px; /* Add margin between sorting buttons */
+}
+
+#category {
+  margin: 0 10px; /* Add some margin around the select box */
+  padding: 5px; /* Add padding to the select box */
+}
+
+#filter-apply {
+  padding: 5px 10px; /* Add padding to the button */
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#filter-apply button:hover {
+  background-color: #0056b3;
+}
+
+.sorting-buttons {
+  display: inline-block; 
+  margin-left: 10%; 
+}
+
+.sort-form button {
+  background-color: green; 
+  color: white; 
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer; 
+  border-radius: 4px;
+}
+
+.sort-form button:hover {
+  background-color: darkgreen; 
+}
+
+/* Style for the scroll to top button */
+#scrollToTopBtn {
+  display: none;  /* Initially hide the button */
+  position: fixed;
+  bottom: 10%;
+  right: 5%;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+#scrollToTopBtn:hover {
+  background-color: #555;
+}
+
+.onside{
+  display: flex;
+  display: inline-block;  
+}
+.gapbtw td{
+  padding-right: 10px;
+  text-align: center;
+}
+.gapbtw {
+  text-align: center;
+}
+.onside tr{
+  padding-bottom:34px;
+}
