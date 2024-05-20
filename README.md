@@ -37,6 +37,8 @@ The Request Forum Website is a community board designed for the easy exchange of
    
 4. **Run Flask:**
     ```bash
+    export FLASK_APP=app.py
+    
     flask run
     ```
 
